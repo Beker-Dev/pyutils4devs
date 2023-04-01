@@ -1,5 +1,4 @@
 from minio import Minio
-from typing import Any
 
 
 class MinIO:
@@ -9,7 +8,7 @@ class MinIO:
             access_key: str,
             secret_key: str,
             bucket_name: str,
-            extensions_accepted: list = Any,
+            extensions_accepted: list = '__all__',
             secure: bool = False
     ):
         self.__address = address
