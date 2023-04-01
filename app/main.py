@@ -1,4 +1,4 @@
-from app.generators.jwt import JWT
+from app.utils.jwt import JWT
 
 
 if __name__ == "__main__":
