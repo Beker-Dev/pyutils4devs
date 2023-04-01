@@ -18,3 +18,14 @@ class MinIO:
         self.__extensions_accepted = extensions_accepted
         self.__secure = secure
         self.__client = Minio(self.__address, self.__access_key, self.__secret_key, secure=self.__secure)
+
+    def __connection(method):
+        def decorator(self, *args, **kwargs):
+            if not self.__client.bucket_exists(self.__bucket_name):
+                self.__client.make_bucket(self.__bucket_name)
+            return method(*args, **kwargs)
+        return decorator
+
+    @__connection
+    def save_file(self, file):
+        ...

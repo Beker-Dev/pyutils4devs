@@ -8,3 +8,5 @@ if __name__ == "__main__":
         secret_key="test",
         bucket_name="test",
     )
+
+    minio.save_file(None)
