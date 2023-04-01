@@ -1,7 +1,10 @@
-from app.utils.jwt import JWT
+from app.utils.minio import MinIO
 
 
 if __name__ == "__main__":
-    payload = {'user_id': 1, 'username': 'admin'}
-    jwt = JWT()
-    tkn = jwt.get_token(payload)
+    minio = MinIO(
+        address="localhost:9000",
+        access_key="test",
+        secret_key="test",
+        bucket_name="test",
+    )
