@@ -9,4 +9,4 @@ if __name__ == "__main__":
         bucket_name="test",
     )
 
-    minio.save_file(None)
+    minio.save_file('myfile.txt')
