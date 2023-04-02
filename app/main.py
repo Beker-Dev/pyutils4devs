@@ -1,5 +1,4 @@
-from app.utils.minio import MinIO
-
+from app.utils.encrypt import Encrypt
 
 if __name__ == "__main__":
     pass

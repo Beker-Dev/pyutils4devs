@@ -25,14 +25,14 @@ class MinIO:
 
     @connection
     @extensions_validator
-    def save_file(self, filepath):
+    def save_file(self, filepath) -> str:
         filename, extension = os.path.splitext(filepath)
         filename += datetime.now().strftime('%Y%m%d%H%M%S%f') + extension
         self.client.fput_object(self.bucket_name, filename, filepath)
         return filename
 
     @connection
-    def get_file(self, filename: str, expires_minutes: int = 1440):
+    def get_file(self, filename: str, expires_minutes: int = 1440) -> str:
         return self.client.get_presigned_url(
             'GET',
             self.bucket_name,
