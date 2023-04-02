@@ -1,6 +1,8 @@
 from app.decorators.minio import connection, extensions_validator
+from app.decorators.file import handle_file_exits
 
 from minio import Minio
+from minio.datatypes import Object as MinioObject
 from datetime import datetime, timedelta
 import os
 
@@ -25,6 +27,7 @@ class MinIO:
 
     @connection
     @extensions_validator
+    @handle_file_exits
     def save_file(self, filepath) -> str:
         filename, extension = os.path.splitext(filepath)
         filename += datetime.now().strftime('%Y%m%d%H%M%S%f') + extension
@@ -32,10 +35,14 @@ class MinIO:
         return filename
 
     @connection
-    def get_file(self, filename: str, expires_minutes: int = 1440) -> str:
+    def get_uri_file(self, filename: str, expires_minutes: int = 1440) -> str:
         return self.client.get_presigned_url(
             'GET',
             self.bucket_name,
             filename,
             expires=timedelta(minutes=expires_minutes)
         )
+
+    @connection
+    def get_file(self, filename: str, filepath: str) -> MinioObject:
+        return self.client.fget_object(self.bucket_name, filename, filepath)
