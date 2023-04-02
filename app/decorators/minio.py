@@ -16,9 +16,10 @@ def extensions_validator(func):
         self = args[0]
         filepath = kwargs.get('filepath') or args[1]
         *_, file_extension = os.path.splitext(filepath)
+        file_extension = file_extension[1:]
 
         if self.extensions_accepted == '__all__' or file_extension in self.extensions_accepted:
             return func(*args, **kwargs)
         else:
-            raise TypeError(f"Expected types: {self.extensions_accepted}, got: {file_extension}")
+            raise TypeError(f"Expected extensions: {self.extensions_accepted}, got: {file_extension}")
     return decorator
