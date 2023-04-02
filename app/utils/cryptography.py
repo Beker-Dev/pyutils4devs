@@ -1,7 +1,7 @@
 import bcrypt
 
 
-class Encrypt:
+class Cryptography:
     def __init__(self, salt: bytes = bcrypt.gensalt()):
         self.salt = salt
 
@@ -10,3 +10,6 @@ class Encrypt:
 
     def check_password(self, pw: bytes, hashed_string: bytes) -> bool:
         return bcrypt.checkpw(pw, hashed_string)
+
+    def encrypt_file(self, filepath: str) -> str:
+        ...
