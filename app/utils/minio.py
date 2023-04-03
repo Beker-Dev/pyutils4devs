@@ -1,5 +1,5 @@
 from app.decorators.minio import connection, extensions_validator
-from app.decorators.file import handle_file_exits
+from app.decorators.file import handle_file_exists
 
 from minio import Minio
 from minio.datatypes import Object as MinioObject
@@ -27,7 +27,7 @@ class MinIO:
 
     @connection
     @extensions_validator
-    @handle_file_exits
+    @handle_file_exists
     def save_file(self, filepath) -> str:
         filename, extension = os.path.splitext(filepath)
         filename += datetime.now().strftime('%Y%m%d%H%M%S%f') + extension
